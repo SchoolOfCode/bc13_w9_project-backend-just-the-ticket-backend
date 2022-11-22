@@ -1,6 +1,11 @@
 const { Pool } = require("pg");
+
+if (process.env.POSTGRES_CONNECTION_URL == undefined) {
+  console.log("POSTGRES_CONNECTION_URL is undefined")
+}
+
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_CONNECTION_URL,
+  connectionString: 'postgresql://postgres:qrlviNSiN8AuSLb0oZUU@containers-us-west-36.railway.app:5662/railway'
 });
 
 module.exports = {
