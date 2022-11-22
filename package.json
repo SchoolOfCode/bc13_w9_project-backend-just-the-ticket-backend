@@ -1,0 +1,26 @@
+{
+  "name": "bc13_w9_project-backend-just-the-ticket-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SchoolOfCode/bc13_w9_project-backend-just-the-ticket-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SchoolOfCode/bc13_w9_project-backend-just-the-ticket-backend/issues"
+  },
+  "homepage": "https://github.com/SchoolOfCode/bc13_w9_project-backend-just-the-ticket-backend#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.8.0"
+  }
+}
