@@ -15,6 +15,25 @@ export async function createTicket(ticketList) {
     return result.rows;
   }
 
-  export default  {
-    getAllTickets,
-  };
+  export async function getTicketById(id) {
+    const result = await query(
+      `SELECT * 
+      FROM tickets
+      WHERE id = $1`, [id]);
+    const ticket = result.rows[0];
+    return ticket;
+  }
+
+  export async function updateTicketById(id, ticketList) {
+    const result = await query(
+      `UPDATE tickets
+      SET question_author = $1, question_title = $2, room_number = $3, problem_summary = $4, tried_input = $5, code = $6, error_logs = $7
+      WHERE id = $8
+      RETURNING *`, [ticketList.name, ticketList.question, ticketList.roomNumber, ticketList.problem, ticketList.description, ticketList.code, ticketList.errorLog, id]) 
+    const updatedTicket = result.rows[0];
+    return updatedTicket;
+  }
+
+  // export default  {
+  //   getAllTickets,
+  // };
