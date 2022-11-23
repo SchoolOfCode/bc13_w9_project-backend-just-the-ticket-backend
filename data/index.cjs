@@ -12,4 +12,6 @@ module.exports = {
   query: function (text, params) {
     return pool.query(text, params);
   },
+  Pool : pool
 };
+
