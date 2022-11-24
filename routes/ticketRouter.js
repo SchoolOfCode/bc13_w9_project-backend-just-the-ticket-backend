@@ -1,7 +1,7 @@
 import express from 'express';
 const ticketRouter = express.Router();
 
-import { getAllTickets, createTicket, getTicketById, updateTicketById } from "../models/ticketModels.js";
+import { getAllTickets, createTicket, getTicketById, updateTicketById, deleteTicketById } from "../models/ticketModels.js";
 
 ticketRouter.get("/", async function (req, res){
     const allTickets = await getAllTickets();
@@ -23,6 +23,11 @@ ticketRouter.patch("/:id", async function (req, res) {
     const data = req.body;
     const updatedTicket = await updateTicketById(req.params.id, data);
     res.json({ success: true, payload: updatedTicket });
-  });
+});
+
+ticketRouter.delete("/:id", async function (req, res) {
+  const result = await deleteTicketById(req.params.id);
+  res.json({ success: true, payload: result });
+});
 
 export default ticketRouter;
