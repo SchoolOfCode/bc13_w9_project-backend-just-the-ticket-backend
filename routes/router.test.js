@@ -3,7 +3,7 @@ import request from 'supertest';
 import app from '../app.js'
 
 
-import { getAllTickets, createTicket} from "../models/ticketModels.js";
+import { getAllTickets } from "../models/ticketModels.js";
 
 import db  from '../data/index.cjs'
 import ticketRouter from './ticketRouter.js';
@@ -27,23 +27,25 @@ import ticketRouter from './ticketRouter.js';
     })
     test ('post objects with key value pair', async ()=> {
         const newTicket = "Mike"
-
         const res = await request(app).post("/api/tickets").send({name: "Mike"}) 
-
-
-    expect(res.body).toStrictEqual([
-        {
-            "id": expect.any(Number),
-            "question_author": "Mike",
-            "question_title": null,
-            "room_number": null,
-            "problem_summary": null,
-            "tried_input": null,
-            "code": null,
-            "error_logs": null
-        }
-    ])
-})
+        expect(res.body).toStrictEqual([
+            {
+                "id": expect.any(Number),
+                "question_author": "Mike",
+                "question_title": null,
+                "room_number": null,
+                "problem_summary": null,
+                "tried_input": null,
+                "code": null,
+                "error_logs": null,
+                "status": null
+            }
+        ])
+    })
+    test('deletes a ticket', async ()=> {
+        const res = await request(app).delete("/api/tickets/1")
+        expect(res.status).toBe(200);
+    })
 
     afterAll(async function(){
         await pool.end();
