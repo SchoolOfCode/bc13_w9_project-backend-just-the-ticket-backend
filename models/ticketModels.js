@@ -6,11 +6,11 @@ export async function getAllTickets() {
     return allTickets;
   }
 
-export async function createTicket(ticketList) {
+export async function createTicket({ name, question, roomNumber, problem, description, code, errorLog }) {
     const result = await query(
       `INSERT INTO tickets (question_author, question_title, room_number, problem_summary, tried_input, code, error_logs)
     VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING * `,
-      [ticketList.name, ticketList.question, ticketList.roomNumber, ticketList.problem, ticketList.description, ticketList.code, ticketList.errorLog]
+      [name, question, roomNumber, problem, description, code, errorLog]
     );
     return result.rows;
   }
@@ -24,12 +24,12 @@ export async function getTicketById(id) {
   return ticket;
 }
 
-export async function updateTicketById(id, ticketList) {
+export async function updateTicketById(id, { name, question, roomNumber, problem, description, code, errorLog }) {
   const result = await query(
     `UPDATE tickets
     SET question_author = $1, question_title = $2, room_number = $3, problem_summary = $4, tried_input = $5, code = $6, error_logs = $7
     WHERE id = $8
-    RETURNING *`, [ticketList.name, ticketList.question, ticketList.roomNumber, ticketList.problem, ticketList.description, ticketList.code, ticketList.errorLog, id]) 
+    RETURNING *`, [name, question, roomNumber, problem, description, code, errorLog], id) 
   const updatedTicket = result.rows[0];
   return updatedTicket;
 }
